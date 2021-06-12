@@ -12,21 +12,25 @@ public class BirdController : MonoBehaviour
 
     private void CheckBaloonPosition(Transform baloon)
     {
-        if (IsBehind(baloon.position, transform.position))
+        if (IsInLeft(baloon.position, transform.position))
         {
             Debug.Log("Behind");
+            direction = Vector2.right;
         }
-        else if (IsBefore(baloon.position, transform.position))
+        else if (IsInRight(baloon.position, transform.position))
         {
             Debug.Log("Before");
+            direction = Vector2.left;
         }
         else if (IsBelow(baloon.position, transform.position))
         {
             Debug.Log("Below");
+            direction = Vector2.up;
         }
         else if (IsAbove(baloon.position, transform.position))
         {
             Debug.Log("Above");
+            direction = Vector3.down;
         }
     }
 
