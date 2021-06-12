@@ -2,6 +2,17 @@ using UnityEngine;
 
 public class BirdController : MonoBehaviour
 {
+    public float speed = 1f;
+    private Vector3 direction = Vector3.zero;
+
+    private void Update()
+    {
+        if(direction != Vector3.zero)
+        {
+            transform.Translate(direction * speed * Time.deltaTime);
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Baloon"))
