@@ -30,24 +30,24 @@ public class BirdController : MonoBehaviour
         }
     }
 
-    private bool IsBehind(Vector3 a, Vector3 b)
+    private bool IsInLeft(Vector3 a, Vector3 b)
     {
-        return a.x < b.x && Difference(a.y, b.y) <= 1f;
+        return (int)a.x < (int)b.x && Difference(a.y, b.y) <= 1f;
     }
 
-    private bool IsBefore(Vector3 a, Vector3 b)
+    private bool IsInRight(Vector3 a, Vector3 b)
     {
-        return a.x > b.x && Difference(a.y, b.y) <= 1f;
+        return (int)a.x > (int)b.x && Difference(a.y, b.y) <= 1f;
     }
 
     private bool IsBelow(Vector3 a, Vector3 b)
     {
-        return a.y < b.y && Difference(a.x, b.x) <= 1f;
+        return (int)a.y < (int)b.y && Difference(a.x, b.x) <= 1f;
     }
 
     private bool IsAbove(Vector3 a, Vector3 b)
     {
-        return a.y > b.y && Difference(a.x, b.x) <= 1f;
+        return (int)a.y > (int)b.y && Difference(a.x, b.x) <= 1f;
     }
 
     private float Difference(float a, float b)
