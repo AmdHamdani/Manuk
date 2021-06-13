@@ -20,7 +20,6 @@ public class ObstacleMover : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Enter");
         if(collision.CompareTag("Remover"))
         {
             if(spawner != null)
