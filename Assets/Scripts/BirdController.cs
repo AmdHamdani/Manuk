@@ -14,10 +14,14 @@ public class BirdController : MonoBehaviour
     private bool disableMoveUp = false;
     private Vector3 direction = Vector3.zero;
     private Transform baloon;
+    private GameManager manager;
+    private Animator animator;
 
     private void Start()
     {
         baloon = GameObject.FindGameObjectWithTag("Baloon").transform;
+        manager = FindObjectOfType<GameManager>();
+        animator = GetComponent<Animator>();
         StartCoroutine(StopMovement());
         StartCoroutine(CheckFlock());
     }
@@ -39,7 +43,9 @@ public class BirdController : MonoBehaviour
 
         if(collision.CompareTag("Obstacle"))
         {
+            animator.SetTrigger("Fall");
             gameObject.SetActive(false);
+            manager.birds.Remove(gameObject);
         }
     }
 
@@ -80,7 +86,7 @@ public class BirdController : MonoBehaviour
 
     private IEnumerator StopMovement()
     {
-        while(true)
+        while(manager.isRunning)
         {
             yield return null;
             if(isMoving)
@@ -98,7 +104,7 @@ public class BirdController : MonoBehaviour
 
     private IEnumerator CheckFlock()
     {
-        while(true)
+        while(manager.isRunning)
         {
             yield return null;
             if(canCheckFlock)
@@ -117,7 +123,9 @@ public class BirdController : MonoBehaviour
 
                 if(flockCounter <= 1)
                 {
+                    animator.SetTrigger("Fall");
                     gameObject.SetActive(false);
+                    manager.birds.Remove(gameObject);
                 }
             }
         }
