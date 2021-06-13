@@ -8,6 +8,8 @@ TagManager:
   - Bird
   - Wall
   - Region
+  - Remover
+  - Obstacle
   layers:
   - Default
   - TransparentFX

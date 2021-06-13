@@ -10,4 +10,9 @@ public class Utility
         mousePos.z = 0;
         return mousePos;
     }
+
+    public static float GetRandomDirection()
+    {
+        return Random.Range(0f, 1f);
+    }
 }

@@ -36,6 +36,11 @@ public class BirdController : MonoBehaviour
         {
             disableMoveUp = true;
         }
+
+        if(collision.CompareTag("Obstacle"))
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -122,19 +127,19 @@ public class BirdController : MonoBehaviour
     {
         if (IsInLeft(baloon.position, transform.position))
         {
-            SetDirection(new Vector2(1, disableMoveUp? 0f: GetRandomDirection()));
+            SetDirection(new Vector2(1, disableMoveUp? 0f: Utility.GetRandomDirection()));
         }
         else if (IsInRight(baloon.position, transform.position))
         {
-            SetDirection(new Vector2(-1, disableMoveUp ? 0f : GetRandomDirection()));
+            SetDirection(new Vector2(-1, disableMoveUp ? 0f : Utility.GetRandomDirection()));
         }
         else if (IsBelow(baloon.position, transform.position))
         {
-            SetDirection(new Vector2(GetRandomDirection(), disableMoveUp ? 0f : 1f));
+            SetDirection(new Vector2(Utility.GetRandomDirection(), disableMoveUp ? 0f : 1f));
         }
         else if (IsAbove(baloon.position, transform.position))
         {
-            SetDirection(new Vector2(GetRandomDirection(), -1));
+            SetDirection(new Vector2(Utility.GetRandomDirection(), -1));
         }
     }
 
@@ -143,24 +148,19 @@ public class BirdController : MonoBehaviour
         var wall = collision.transform;
         if (IsInLeft(wall.position, transform.position))
         {
-            SetDirection(new Vector2(1, GetRandomDirection()));
+            SetDirection(new Vector2(1, Utility.GetRandomDirection()));
         }
         else if (IsInRight(wall.position, transform.position))
         {
-            SetDirection(new Vector2(-1, GetRandomDirection()));
+            SetDirection(new Vector2(-1, Utility.GetRandomDirection()));
         }
     }
 
-    private void SetDirection(Vector2 dir)
+    public void SetDirection(Vector2 dir)
     {
         direction = dir;
         isMoving = true;
         canCheckFlock = true;
-    }
-
-    private float GetRandomDirection()
-    {
-        return Random.Range(0f, 1f);
     }
 
     private bool IsInLeft(Vector3 a, Vector3 b)
