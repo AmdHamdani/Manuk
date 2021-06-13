@@ -1,22 +1,19 @@
 fileFormatVersion: 2
-guid: e4e4e9f23a769b845a2b9396fb8c679f
+guid: 473b1c22441ffa6469c849c2313944d3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -724819364768403272
-    second: Manuk - Falling_0
+      213: 1424132649760846008
+    second: Air Balloon_0
   - first:
-      213: -5999749991587482486
-    second: Manuk - Falling_1
+      213: -5658336172700965440
+    second: Air Balloon_1
   - first:
-      213: -8722875465657845554
-    second: Manuk - Falling_2
+      213: -8470107281690541305
+    second: Air Balloon_2
   - first:
-      213: -6861145291889151977
-    second: Manuk - Falling_3
-  - first:
-      213: -6162909354175801835
-    second: Manuk - Falling_4
+      213: -8245055440353523592
+    second: Air Balloon_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -126,97 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Manuk - Falling_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 64
-        width: 32
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8b0b7a4c0ace0f5f0800000000000000
-      internalID: -724819364768403272
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Manuk - Falling_1
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 48
-        width: 32
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a847642bb2b9cbca0800000000000000
-      internalID: -5999749991587482486
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Manuk - Falling_2
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 32
-        width: 32
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ec87e71dafe12f680800000000000000
-      internalID: -8722875465657845554
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Manuk - Falling_3
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 16
-        width: 32
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7107a9c75b058c0a0800000000000000
-      internalID: -6861145291889151977
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Manuk - Falling_4
+      name: Air Balloon_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 32
-        height: 16
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -224,8 +137,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5165b694892f87aa0800000000000000
-      internalID: -6162909354175801835
+      spriteID: 8b0f70e791983c310800000000000000
+      internalID: 1424132649760846008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Air Balloon_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c56a66ea3d8971b0800000000000000
+      internalID: -5658336172700965440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Air Balloon_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 703c269cd42247a80800000000000000
+      internalID: -8470107281690541305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Air Balloon_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 878835cd2cda39d80800000000000000
+      internalID: -8245055440353523592
       vertices: []
       indices: 
       edges: []
