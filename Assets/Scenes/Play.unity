@@ -1602,7 +1602,7 @@ GameObject:
   - component: {fileID: 1610408134}
   - component: {fileID: 1610408133}
   m_Layer: 5
-  m_Name: Main Menu
+  m_Name: Thank You
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
