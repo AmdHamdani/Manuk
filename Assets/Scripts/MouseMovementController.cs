@@ -6,10 +6,9 @@ public class MouseMovementController : MonoBehaviour
 {
     private bool canBeControlled;
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if(canBeControlled)
+        if (canBeControlled)
         {
             transform.position = Utility.MousePosition();
         }
@@ -21,5 +20,11 @@ public class MouseMovementController : MonoBehaviour
         {
             canBeControlled = true;
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, 1f);
     }
 }
