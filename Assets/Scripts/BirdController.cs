@@ -8,15 +8,18 @@ public class BirdController : MonoBehaviour
     public float intervalToStop = 1.5f;
     public float checkFlockInterval = 5;
     public float birdRadius = 1f;
+    public float fallingAnimationDuration = 1f;
 
     private bool isMoving = false;
     private bool canCheckFlock = false;
     private bool disableMoveUp = false;
     private Vector3 direction = Vector3.zero;
     private Transform baloon;
+    private Animator animator;
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
         baloon = GameObject.FindGameObjectWithTag("Baloon").transform;
         StartCoroutine(StopMovement());
         StartCoroutine(CheckFlock());
@@ -39,7 +42,8 @@ public class BirdController : MonoBehaviour
 
         if(collision.CompareTag("Obstacle"))
         {
-            gameObject.SetActive(false);
+            StartCoroutine(DestroyTimer(fallingAnimationDuration));
+            // gameObject.SetActive(false);
         }
     }
 
@@ -117,7 +121,8 @@ public class BirdController : MonoBehaviour
 
                 if(flockCounter <= 1)
                 {
-                    gameObject.SetActive(false);
+                    StartCoroutine(DestroyTimer(fallingAnimationDuration));
+                    // gameObject.SetActive(false);
                 }
             }
         }
@@ -141,6 +146,11 @@ public class BirdController : MonoBehaviour
         {
             SetDirection(new Vector2(Utility.GetRandomDirection(), -1));
         }
+    }
+    IEnumerator DestroyTimer(float duration){
+        animator.SetTrigger("Fall");
+        yield return new WaitForSeconds(duration);
+        gameObject.SetActive(false);
     }
 
     private void CheckWall(Collider2D collision)
