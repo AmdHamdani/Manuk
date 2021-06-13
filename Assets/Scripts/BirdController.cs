@@ -11,7 +11,7 @@ public class BirdController : MonoBehaviour
 
     private bool isMoving = false;
     private bool canCheckFlock = false;
-    private bool isDown = false;
+    private bool disableMoveUp = false;
     private Vector3 direction = Vector3.zero;
     private Transform baloon;
 
@@ -30,6 +30,14 @@ public class BirdController : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Region"))
+        {
+            disableMoveUp = true;
+        }
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Baloon"))
@@ -43,7 +51,18 @@ public class BirdController : MonoBehaviour
             CheckWall(collision);
         }
 
+        if (collision.CompareTag("Region"))
+        {
+            disableMoveUp = true;
+        }
     }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Region"))
+        {
+            disableMoveUp = false;
+        }
     }
 
 #if UNITY_EDITOR
@@ -103,15 +122,15 @@ public class BirdController : MonoBehaviour
     {
         if (IsInLeft(baloon.position, transform.position))
         {
-            SetDirection(new Vector2(1, GetRandomDirection()));
+            SetDirection(new Vector2(1, disableMoveUp? 0f: GetRandomDirection()));
         }
         else if (IsInRight(baloon.position, transform.position))
         {
-            SetDirection(new Vector2(-1, GetRandomDirection()));
+            SetDirection(new Vector2(-1, disableMoveUp ? 0f : GetRandomDirection()));
         }
         else if (IsBelow(baloon.position, transform.position))
         {
-            SetDirection(new Vector2(GetRandomDirection(), 1));
+            SetDirection(new Vector2(GetRandomDirection(), disableMoveUp ? 0f : 1f));
         }
         else if (IsAbove(baloon.position, transform.position))
         {
