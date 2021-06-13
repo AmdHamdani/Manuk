@@ -55,19 +55,19 @@ public class BirdController : MonoBehaviour
     {
         if (IsInLeft(baloon.position, transform.position))
         {
-            SetDirection(Vector2.right);
+            SetDirection(new Vector2(1, GetRandomDirection()));
         }
         else if (IsInRight(baloon.position, transform.position))
         {
-            SetDirection(Vector2.left);
+            SetDirection(new Vector2(-1, GetRandomDirection()));
         }
         else if (IsBelow(baloon.position, transform.position))
         {
-            SetDirection(Vector2.up);
+            SetDirection(new Vector2(GetRandomDirection(), 1));
         }
         else if (IsAbove(baloon.position, transform.position))
         {
-            SetDirection(Vector2.down);
+            SetDirection(new Vector2(GetRandomDirection(), -1));
         }
     }
 
@@ -75,6 +75,11 @@ public class BirdController : MonoBehaviour
     {
         direction = dir;
         isMoving = true;
+    }
+
+    private float GetRandomDirection()
+    {
+        return Random.Range(0f, 1f);
     }
 
     private bool IsInLeft(Vector3 a, Vector3 b)
