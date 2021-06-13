@@ -7,6 +7,7 @@ public class BirdController : MonoBehaviour
     public float baloonDistance = 1f;
     public float intervalToStop = 1.5f;
     private Vector3 direction = Vector3.zero;
+    public float birdRadius = 1f;
     private bool isMoving = false;
     private Transform baloon;
 
@@ -32,6 +33,14 @@ public class BirdController : MonoBehaviour
             CheckBaloonPosition(collision.transform);
         }
     }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, birdRadius);
+    }
+#endif
 
     private IEnumerator StopMovement()
     {
