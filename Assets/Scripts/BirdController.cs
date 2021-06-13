@@ -16,11 +16,13 @@ public class BirdController : MonoBehaviour
     private Vector3 direction = Vector3.zero;
     private Transform baloon;
     private Animator animator;
+    private GameManager manager;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
         baloon = GameObject.FindGameObjectWithTag("Baloon").transform;
+        manager = FindObjectOfType<GameManager>();
         StartCoroutine(StopMovement());
         StartCoroutine(CheckFlock());
     }
@@ -43,7 +45,6 @@ public class BirdController : MonoBehaviour
         if(collision.CompareTag("Obstacle"))
         {
             StartCoroutine(DestroyTimer(fallingAnimationDuration));
-            // gameObject.SetActive(false);
         }
     }
 
@@ -84,7 +85,7 @@ public class BirdController : MonoBehaviour
 
     private IEnumerator StopMovement()
     {
-        while(true)
+        while(manager.isRunning)
         {
             yield return null;
             if(isMoving)
@@ -102,7 +103,7 @@ public class BirdController : MonoBehaviour
 
     private IEnumerator CheckFlock()
     {
-        while(true)
+        while(manager.isRunning)
         {
             yield return null;
             if(canCheckFlock)
@@ -122,7 +123,6 @@ public class BirdController : MonoBehaviour
                 if(flockCounter <= 1)
                 {
                     StartCoroutine(DestroyTimer(fallingAnimationDuration));
-                    // gameObject.SetActive(false);
                 }
             }
         }
@@ -147,7 +147,9 @@ public class BirdController : MonoBehaviour
             SetDirection(new Vector2(Utility.GetRandomDirection(), -1));
         }
     }
-    IEnumerator DestroyTimer(float duration){
+
+    private IEnumerator DestroyTimer(float duration){
+        manager.birds.Remove(gameObject);
         animator.SetTrigger("Fall");
         yield return new WaitForSeconds(duration);
         gameObject.SetActive(false);
