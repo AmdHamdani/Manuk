@@ -1,13 +1,24 @@
+using System.Collections;
 using UnityEngine;
 
 public class BirdController : MonoBehaviour
 {
     public float speed = 1f;
+    public float baloonDistance = 1f;
+    public float intervalToStop = 1.5f;
     private Vector3 direction = Vector3.zero;
+    private bool isMoving = false;
+    private Transform baloon;
+
+    private void Start()
+    {
+        baloon = GameObject.FindGameObjectWithTag("Baloon").transform;
+        StartCoroutine(StopMovement());
+    }
 
     private void Update()
     {
-        if(direction != Vector3.zero)
+        if (direction != Vector3.zero && isMoving)
         {
             transform.Translate(direction * speed * Time.deltaTime);
         }
@@ -17,7 +28,26 @@ public class BirdController : MonoBehaviour
     {
         if (collision.CompareTag("Baloon"))
         {
+            baloon = collision.transform;
             CheckBaloonPosition(collision.transform);
+        }
+    }
+
+    private IEnumerator StopMovement()
+    {
+        while(true)
+        {
+            yield return null;
+            if(isMoving)
+            {
+                yield return new WaitForSeconds(intervalToStop);
+                var distance = Vector2.Distance(baloon.position, transform.position);
+                if (distance >= baloonDistance)
+                {
+                    isMoving = false;
+                    direction = Vector2.zero;
+                }
+            }
         }
     }
 
@@ -25,24 +55,26 @@ public class BirdController : MonoBehaviour
     {
         if (IsInLeft(baloon.position, transform.position))
         {
-            Debug.Log("Behind");
-            direction = Vector2.right;
+            SetDirection(Vector2.right);
         }
         else if (IsInRight(baloon.position, transform.position))
         {
-            Debug.Log("Before");
-            direction = Vector2.left;
+            SetDirection(Vector2.left);
         }
         else if (IsBelow(baloon.position, transform.position))
         {
-            Debug.Log("Below");
-            direction = Vector2.up;
+            SetDirection(Vector2.up);
         }
         else if (IsAbove(baloon.position, transform.position))
         {
-            Debug.Log("Above");
-            direction = Vector3.down;
+            SetDirection(Vector2.down);
         }
+    }
+
+    private void SetDirection(Vector2 dir)
+    {
+        direction = dir;
+        isMoving = true;
     }
 
     private bool IsInLeft(Vector3 a, Vector3 b)
