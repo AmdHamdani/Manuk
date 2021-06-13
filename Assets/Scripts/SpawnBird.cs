@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpawnBird : MonoBehaviour
 {
     public GameObject bird;
+    public float minOffset, maxOffset;
 
     private bool spawned = false;
     private int totalSpawn = 2;
@@ -17,11 +18,17 @@ public class SpawnBird : MonoBehaviour
             {
                 var pos = transform.position;
                 pos.x += .5f;
-                var go = Instantiate(bird, transform.position, Quaternion.identity);
+                var go = Instantiate(bird, transform.position + RandomOffset(minOffset, maxOffset), Quaternion.identity);
                 go.GetComponent<BirdController>().SetDirection(new Vector2(Utility.GetRandomDirection(), 1f));
             }
 
             spawned = true;
+            gameObject.SetActive(false);
         }
+    }
+    private Vector3 RandomOffset(float min, float max){
+        float x = Random.Range(min, max);
+        float y = Random.Range(min, max);
+        return new Vector2(x, y);
     }
 }
