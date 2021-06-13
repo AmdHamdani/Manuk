@@ -4,17 +4,22 @@ using UnityEngine;
 public class BirdController : MonoBehaviour
 {
     public float speed = 1f;
-    public float baloonDistance = 1f;
+    public float baloonDistance = 3f;
     public float intervalToStop = 1.5f;
-    private Vector3 direction = Vector3.zero;
+    public float checkFlockInterval = 5;
     public float birdRadius = 1f;
+
     private bool isMoving = false;
+    private bool canCheckFlock = false;
+    private bool isDown = false;
+    private Vector3 direction = Vector3.zero;
     private Transform baloon;
 
     private void Start()
     {
         baloon = GameObject.FindGameObjectWithTag("Baloon").transform;
         StartCoroutine(StopMovement());
+        StartCoroutine(CheckFlock());
     }
 
     private void Update()
@@ -60,6 +65,33 @@ public class BirdController : MonoBehaviour
         }
     }
 
+    private IEnumerator CheckFlock()
+    {
+        while(true)
+        {
+            yield return null;
+            if(canCheckFlock)
+            {
+                yield return new WaitForSeconds(checkFlockInterval);
+                var colliders = Physics2D.OverlapCircleAll(transform.position, birdRadius);
+
+                var flockCounter = 0;
+                foreach(var collider in colliders)
+                {
+                    if(collider.CompareTag("Bird"))
+                    {
+                        flockCounter++;
+                    }
+                }
+
+                if(flockCounter <= 1)
+                {
+                    gameObject.SetActive(false);
+                }
+            }
+        }
+    }
+
     private void CheckBaloonPosition(Transform baloon)
     {
         if (IsInLeft(baloon.position, transform.position))
@@ -84,6 +116,7 @@ public class BirdController : MonoBehaviour
     {
         direction = dir;
         isMoving = true;
+        canCheckFlock = true;
     }
 
     private float GetRandomDirection()
