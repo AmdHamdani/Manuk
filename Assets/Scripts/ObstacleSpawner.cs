@@ -17,15 +17,17 @@ public class ObstacleSpawner : MonoBehaviour
     public Transform rightRange;
     [HideInInspector]
     public int totalObstacles = 0;
+    private GameManager manager;
 
     private void Start()
     {
+        manager = FindObjectOfType<GameManager>();
         StartCoroutine(SpawnObstacle());
     }
 
     private IEnumerator SpawnObstacle()
     {
-        while (true)
+        while (manager.isRunning)
         {
             yield return null;
             yield return new WaitForSeconds(spawnInterval);
