@@ -8,6 +8,12 @@ public class SpawnBird : MonoBehaviour
 
     private bool spawned = false;
     private int totalSpawn = 2;
+    private GameManager manager;
+
+    private void Start()
+    {
+        manager = FindObjectOfType<GameManager>();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -19,6 +25,7 @@ public class SpawnBird : MonoBehaviour
                 pos.x += .5f;
                 var go = Instantiate(bird, transform.position, Quaternion.identity);
                 go.GetComponent<BirdController>().SetDirection(new Vector2(Utility.GetRandomDirection(), 1f));
+                manager.birds.Add(go);
             }
 
             spawned = true;
