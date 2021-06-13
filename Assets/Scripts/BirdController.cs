@@ -37,6 +37,13 @@ public class BirdController : MonoBehaviour
             baloon = collision.transform;
             CheckBaloonPosition(collision.transform);
         }
+
+        if(collision.CompareTag("Wall"))
+        {
+            CheckWall(collision);
+        }
+
+    }
     }
 
 #if UNITY_EDITOR
@@ -109,6 +116,19 @@ public class BirdController : MonoBehaviour
         else if (IsAbove(baloon.position, transform.position))
         {
             SetDirection(new Vector2(GetRandomDirection(), -1));
+        }
+    }
+
+    private void CheckWall(Collider2D collision)
+    {
+        var wall = collision.transform;
+        if (IsInLeft(wall.position, transform.position))
+        {
+            SetDirection(new Vector2(1, GetRandomDirection()));
+        }
+        else if (IsInRight(wall.position, transform.position))
+        {
+            SetDirection(new Vector2(-1, GetRandomDirection()));
         }
     }
 
